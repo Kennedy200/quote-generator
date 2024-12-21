@@ -1,36 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0;600;0;700;1,400&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Playfair Display', serif;
 }
 
-body{
+body {
     background: #bbc6fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;  /* Adds breathing room on smaller screens */
 }
 
-.quote-box{
+.quote-box {
     background: #fff;
-    width: 700px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    max-width: 700px;
+    width: 90%;  /* Makes it fluid for smaller screens */
     padding: 40px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 10px 20px 0px rgba(0, 0, 0, 0.15);
+    margin: 20px 0;  /* Adds spacing when necessary */
 }
 
-.quote-box h2{
-    font-size: 32px;
-    margin-bottom: 40px;
+.quote-box h2 {
+    font-size: 28px;  /* Slightly smaller for mobile */
+    margin-bottom: 30px;
     position: relative;
 }
 
-.quote-box h2::after{
+.quote-box h2::after {
     content: '';
     width: 75px;
     height: 3px;
@@ -42,23 +45,25 @@ body{
     transform: translateX(-50%);
 }
 
-.quote-box blockquote{
-    font-size: 26px;
-    min-height: 110px;
+.quote-box blockquote {
+    font-size: 24px;
+    min-height: 90px;
 }
 
-.quote-box blockquote::before, .quote-box blockquote::after{
+.quote-box blockquote::before,
+.quote-box blockquote::after {
     content: '""';
 }
 
-.quote-box span{
+.quote-box span {
     display: block;
     margin-top: 10px;
     float: right;
     position: relative;
+    font-size: 18px;
 }
 
-.quote-box span::before{
+.quote-box span::before {
     content: '';
     width: 20px;
     height: 2px;
@@ -68,33 +73,95 @@ body{
     left: -30px;
 }
 
-.quote-box div{
+.quote-box div {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 40px;
     display: flex;
+    flex-wrap: wrap;  /* Ensure buttons wrap on smaller screens */
     justify-content: center;
+    gap: 10px;
 }
 
-.quote-box button{
+.quote-box button {
     background: rgb(23, 124, 229);
     color: #fff;
     border-radius: 25px;
     border: 1px solid rgb(23, 124, 229);
-    width: 150px;
-    height: 50px;
+    width: 140px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.quote-box button img{
-    width: 20px;
-    margin-right: 10px;
+.quote-box button:hover {
+    background: #1b6ed5;
 }
 
-.quote-box button:nth-child(2){
+.quote-box button img {
+    width: 18px;
+    margin-right: 8px;
+}
+
+.quote-box button:nth-child(2) {
     background: transparent;
     color: #333;
+}
+
+/* -------------------------- */
+/* RESPONSIVE DESIGN (Mobile) */
+/* -------------------------- */
+
+@media (max-width: 768px) {
+    .quote-box {
+        width: 95%;  /* Utilize more screen space on smaller devices */
+        padding: 30px;
+    }
+
+    .quote-box h2 {
+        font-size: 24px;
+    }
+
+    .quote-box blockquote {
+        font-size: 20px;
+    }
+
+    .quote-box span {
+        font-size: 16px;
+    }
+
+    .quote-box button {
+        width: 120px;
+        height: 40px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quote-box {
+        padding: 20px;
+    }
+
+    .quote-box h2 {
+        font-size: 22px;
+    }
+
+    .quote-box blockquote {
+        font-size: 18px;
+    }
+
+    .quote-box span {
+        font-size: 14px;
+    }
+
+    .quote-box div {
+        flex-direction: column;  /* Stack buttons vertically */
+    }
+
+    .quote-box button {
+        width: 100%;  /* Full-width buttons */
+        margin: 10px 0;
+    }
 }
