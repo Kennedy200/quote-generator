@@ -1,38 +1,55 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Quote of the day </title>
+    <title>Quote of the Day</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="quote-box">
-        <h2>Quote of the day</h2>
+        <h2>Quote of the Day</h2>
         <blockquote id="quote">Loading...</blockquote>
         <span id="author">Loading...</span>
         <div>
-            <button onclick="getquote(api_url)">New Quote</button>
-            <button onclick="tweet()"><img src="twitter.png.png">Tweet</button>
+            <button onclick="getQuote()">New Quote</button>
+            <button onclick="tweet()">
+                <img src="twitter.png" alt="Tweet"> Tweet
+            </button>
         </div>
     </div>
 
     <script>
-        const quote = document.getElementById("quote");
-        const author = document.getElementById("author");
-        const api_url = "https://api.quotable.io/random";
+        const quoteElement = document.getElementById("quote");
+        const authorElement = document.getElementById("author");
+        const apiUrl = "https://api.api-ninjas.com/v1/quotes";
+        const apiKey = "UTcgY1RDgfsnfJp8z2cr7w==ZRqXYs3pR2hyPsDm";
 
-        async function getquote(url) {
-            const response = await fetch(url);
-            var data = await response.json();
-            
-            quote.innerHTML = data.content;
-            author.innerHTML = data.author;
+        async function getQuote() {
+            try {
+                const response = await fetch(apiUrl, {
+                    headers: { 'X-Api-Key': apiKey }
+                });
+                const data = await response.json();
+                const quote = data[0];
+                quoteElement.innerHTML = `"${quote.quote}"`;
+                authorElement.innerHTML = `- ${quote.author}`;
+            } catch (error) {
+                quoteElement.innerHTML = "Oops! Something went wrong.";
+                authorElement.innerHTML = "";
+                console.error("Error fetching quote:", error);
+            }
         }
-        
-        getquote(api_url);
+
+        getQuote();
 
         function tweet() {
-            window.open("https://twitter.com/intent/tweet?text=" + quote.innerHTML + "--- by " + author.innerHTML, "Tweet Window", "width=600, height=300");
+            const tweetText = `${quoteElement.innerHTML} --- ${authorElement.innerHTML}`;
+            window.open(
+                `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`,
+                "Tweet Window",
+                "width=600, height=300"
+            );
         }
     </script>
 </body>
